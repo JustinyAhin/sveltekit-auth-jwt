@@ -1,3 +1,18 @@
+<script lang="ts" context="module">
+	import type { Load } from '@sveltejs/kit';
+
+	export const load: Load = ({ session }) => {
+		const user = session.user;
+
+		if (user) {
+			return {
+				status: 302,
+				redirect: '/guarded'
+			};
+		}
+	};
+</script>
+
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
@@ -54,39 +69,3 @@
 		<a href="/login">Login</a>
 	</div>
 </section>
-
-<style>
-	.actions {
-		margin-top: 3rem;
-	}
-
-	.actions a {
-		color: #000;
-		text-decoration: underline;
-		font-weight: bold;
-	}
-	form {
-		display: flex;
-		flex-direction: column;
-		background-color: #f2f2f2;
-		padding: 3rem;
-	}
-
-	form .group {
-		margin-bottom: 1rem;
-		display: flex;
-		flex-direction: column;
-	}
-
-	form .group input {
-		padding: 0.5rem;
-	}
-
-	form button[type='submit'] {
-		background-color: #000;
-		font-weight: bold;
-		color: #fff;
-		padding: 1rem 2rem;
-		border: none;
-	}
-</style>

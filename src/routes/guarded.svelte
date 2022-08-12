@@ -3,6 +3,15 @@
 	import type { SessionUser } from 'src/hooks';
 
 	export const load: Load = ({ session }) => {
+		const user = session.user;
+
+		if (!user) {
+			return {
+				status: 302,
+				redirect: '/login'
+			};
+		}
+
 		return {
 			props: {
 				user: session.user

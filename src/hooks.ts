@@ -13,13 +13,7 @@ const handle: Handle = async ({ event, resolve }) => {
 	const { headers } = event.request;
 	const cookies = parse(headers.get('cookie') ?? '');
 
-	if (event.url.pathname === '/guarded') {
-		if (!cookies.AuthorizationToken) {
-			return new Response('Unauthorized', {
-				status: 401
-			});
-		}
-
+	if (cookies.AuthorizationToken) {
 		// Remove Bearer prefix
 		const token = cookies.AuthorizationToken.split(' ')[1];
 
