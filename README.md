@@ -1,2 +1,2 @@
-# svelte-auth-jwt
- 
+# SvelteKit Auth with JWT
+

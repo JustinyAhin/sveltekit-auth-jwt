@@ -12,7 +12,15 @@
 				email,
 				password
 			})
-		});
+		}).then((res) => res.json());
+
+		const { error } = response;
+
+		if (error) {
+			alert(error);
+		} else {
+			window.location.href = '/guarded';
+		}
 	};
 </script>
 
@@ -25,10 +33,10 @@
 <section>
 	<form on:submit|preventDefault={handleLogin}>
 		<label for="email">Email</label>
-		<input type="email" id="email" bind:value={email} />
+		<input type="email" id="email" bind:value={email} required />
 
 		<label for="password">Password</label>
-		<input type="password" id="password" bind:value={password} />
+		<input type="password" id="password" bind:value={password} required />
 
 		<button type="submit">Login</button>
 	</form>
