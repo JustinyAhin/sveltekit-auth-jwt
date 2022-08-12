@@ -1,2 +1,1 @@
 # SvelteKit Auth with JWT
-
