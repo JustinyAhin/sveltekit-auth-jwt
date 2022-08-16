@@ -20,7 +20,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const authCookie = cookie.serialize('AuthorizationToken', `Bearer ${token}`, {
 		httpOnly: true,
 		path: '/',
-		secure: import.meta.env.MODE === 'production',
+		secure: true,
 		sameSite: 'strict',
 		maxAge: 60 * 60 * 24 // 1 day
 	});

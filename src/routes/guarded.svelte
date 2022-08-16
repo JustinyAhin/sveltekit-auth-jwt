@@ -8,6 +8,7 @@
 		if (!user) {
 			return {
 				status: 302,
+				message: 'You must be logged in to view this page',
 				redirect: '/login'
 			};
 		}
