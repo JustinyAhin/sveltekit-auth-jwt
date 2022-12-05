@@ -1,3 +1,4 @@
+import { JWT_ACCESS_SECRET } from '$env/static/private';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -48,7 +49,7 @@ const loginUser = async (email: string, password: string) => {
 		email: user.email
 	};
 
-	const token = jwt.sign(jwtUser, import.meta.env.VITE_JWT_ACCESS_SECRET, {
+	const token = jwt.sign(jwtUser, JWT_ACCESS_SECRET, {
 		expiresIn: '1d'
 	});
 

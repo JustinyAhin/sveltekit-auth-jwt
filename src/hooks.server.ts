@@ -1,5 +1,5 @@
-import type { GetSession, Handle } from '@sveltejs/kit';
-import { parse } from 'cookie';
+import type { Handle } from '@sveltejs/kit';
+import { JWT_ACCESS_SECRET } from '$env/static/private';
 import jwt from 'jsonwebtoken';
 
 import { db } from '$lib/db';
@@ -10,15 +10,14 @@ export type SessionUser = {
 };
 
 const handle: Handle = async ({ event, resolve }) => {
-	const { headers } = event.request;
-	const cookies = parse(headers.get('cookie') ?? '');
+	const authCookie = event.cookies.get('AuthorizationToken');
 
-	if (cookies.AuthorizationToken) {
+	if (authCookie) {
 		// Remove Bearer prefix
-		const token = cookies.AuthorizationToken.split(' ')[1];
+		const token = authCookie.split(' ')[1];
 
 		try {
-			const jwtUser = jwt.verify(token, import.meta.env.VITE_JWT_ACCESS_SECRET);
+			const jwtUser = jwt.verify(token, JWT_ACCESS_SECRET);
 			if (typeof jwtUser === 'string') {
 				throw new Error('Something went wrong');
 			}
@@ -47,10 +46,4 @@ const handle: Handle = async ({ event, resolve }) => {
 	return await resolve(event);
 };
 
-const getSession: GetSession = ({ locals }) => {
-	return {
-		user: locals.user
-	};
-};
-
-export { handle, getSession };
+export { handle };
