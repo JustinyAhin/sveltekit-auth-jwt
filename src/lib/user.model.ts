@@ -5,6 +5,19 @@ import jwt from 'jsonwebtoken';
 import { db } from '$lib/db';
 
 const createUser = async (email: string, password: string) => {
+	// Check if user exists
+	const user = await db.user.findUnique({
+		where: {
+			email
+		}
+	});
+
+	if (user) {
+		return {
+			error: 'User already exists'
+		};
+	}
+
 	try {
 		const user = await db.user.create({
 			data: {

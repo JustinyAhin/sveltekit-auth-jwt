@@ -38,16 +38,3 @@
 		<a href="/signup">Sign Up</a>
 	</div>
 </section>
-
-<style>
-	.notice {
-		padding: 1rem;
-		border-radius: 0.5rem;
-		border-left: 0.5rem solid;
-	}
-
-	.notice.error {
-		background: #f8d7da;
-		border-color: #f5c6cb;
-	}
-</style>

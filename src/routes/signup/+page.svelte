@@ -1,5 +1,8 @@
 <script lang="ts">
+	import type { ActionData } from './$types';
 	import { enhance } from '$app/forms';
+
+	export let form: ActionData;
 </script>
 
 <svelte:head>
@@ -23,6 +26,12 @@
 		<div class="submit-container">
 			<button type="submit">Sign Up</button>
 		</div>
+
+		{#if form?.error}
+			<div class="notice error">
+				{form.error}
+			</div>
+		{/if}
 	</form>
 
 	<div class="actions">
