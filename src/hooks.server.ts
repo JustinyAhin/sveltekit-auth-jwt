@@ -4,11 +4,6 @@ import jwt from 'jsonwebtoken';
 
 import { db } from '$lib/db';
 
-export type SessionUser = {
-	id: string;
-	email: string;
-};
-
 const handle: Handle = async ({ event, resolve }) => {
 	const authCookie = event.cookies.get('AuthorizationToken');
 
@@ -32,7 +27,7 @@ const handle: Handle = async ({ event, resolve }) => {
 				throw new Error('User not found');
 			}
 
-			const sessionUser: SessionUser = {
+			const sessionUser = {
 				id: user.id,
 				email: user.email
 			};
