@@ -14,6 +14,7 @@ export const actions: Actions = {
 	default: async (event) => {
 		const formData = Object.fromEntries(await event.request.formData());
 
+		// Verify that we have an email and a password
 		if (!formData.email || !formData.password) {
 			return invalid(400, {
 				error: 'Missing email or password'
