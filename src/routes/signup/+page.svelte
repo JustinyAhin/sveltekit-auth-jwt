@@ -12,7 +12,7 @@
 <h1>Sign Up</h1>
 
 <section>
-	<form use:enhance>
+	<form method="post" use:enhance>
 		<div class="group">
 			<label for="email">Email</label>
 			<input type="email" name="email" id="email" required />

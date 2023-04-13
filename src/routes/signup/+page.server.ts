@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { createUser } from '$lib/user.model';
 
 export const load: PageServerLoad = (event) => {
@@ -16,7 +16,7 @@ export const actions: Actions = {
 
 		// Verify that we have an email and a password
 		if (!formData.email || !formData.password) {
-			return invalid(400, {
+			return fail(400, {
 				error: 'Missing email or password'
 			});
 		}
@@ -28,7 +28,7 @@ export const actions: Actions = {
 
 		// If there was an error, return an invalid response
 		if (error) {
-			return invalid(500, {
+			return fail(500, {
 				error
 			});
 		}

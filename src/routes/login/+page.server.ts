@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
-import { redirect, invalid } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import { loginUser } from '$lib/user.model';
 
 export const load: PageServerLoad = (event) => {
@@ -15,7 +15,7 @@ export const actions: Actions = {
 		const formData = Object.fromEntries(await event.request.formData());
 
 		if (!formData.email || !formData.password) {
-			return invalid(400, {
+			return fail(400, {
 				error: 'Missing email or password'
 			});
 		}
@@ -25,7 +25,7 @@ export const actions: Actions = {
 		const { error, token } = await loginUser(email, password);
 
 		if (error) {
-			return invalid(401, {
+			return fail(401, {
 				error
 			});
 		}
